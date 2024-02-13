@@ -4,16 +4,16 @@
 
         <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <x-input-label for="nom" :value="__('Nom')" />
+            <x-text-input id="nom" class="block mt-1 w-full" type="text" name="nom" :value="old('nom')" required autofocus autocomplete="nom" />
+            <x-input-error :messages="$errors->get('nom')" class="mt-2" />
         </div>
 
         <!-- Firstname -->
         <div class="mt-4">
-            <x-input-label for="firstname" :value="__('Firstname')" />
-            <x-text-input id="firstname" class="block mt-1 w-full" type="text" name="firstname" :value="old('firstname')" required autocomplete="firstname" />
-            <x-input-error :messages="$errors->get('firstname')" class="mt-2" />
+            <x-input-label for="prenoms" :value="__('Prénoms')" />
+            <x-text-input id="prenoms" class="block mt-1 w-full" type="text" name="prenoms" :value="old('prenoms')" required autocomplete="prenoms" />
+            <x-input-error :messages="$errors->get('prenoms')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
@@ -25,9 +25,9 @@
 
         <!-- Address -->
         <div class="mt-4">
-            <x-input-label for="address" :value="__('Address')" />
-            <x-text-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('address')" class="mt-2" />
+            <x-input-label for="adresse" :value="__('Adresse')" />
+            <x-text-input id="adresse" class="block mt-1 w-full" type="text" name="adresse" :value="old('adresse')" required autocomplete="username" />
+            <x-input-error :messages="$errors->get('adresse')" class="mt-2" />
         </div>
 
 
