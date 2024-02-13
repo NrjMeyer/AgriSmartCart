@@ -1,8 +1,16 @@
 <section>
     <header>
+        @if (session('status') === 'profile-updated')
+            <p style="margin-bottom: 20px; color: aqua;">{{ __('Profil modifié !') }}</p>
+        @endif
+
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('Profile Information') }}
         </h2>
+
+        <div class="profile_picture">
+            <img src="{{ asset('storage/' . $user->photo) }}" alt="{{ $user->prenoms }} {{ $user->nom }}" width="32">
+        </div>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             {{ __("Update your account's profile information and email address.") }}
@@ -13,7 +21,7 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
@@ -33,6 +41,12 @@
             <x-input-label for="adresse" :value="__('adresse')" />
             <x-text-input id="adresse" name="adresse" type="text" class="mt-1 block w-full" :value="old('adresse', $user->adresse)" required autofocus autocomplete="adresse" />
             <x-input-error class="mt-2" :messages="$errors->get('adresse')" />
+        </div>
+
+        <div>
+            <x-input-label for="photo" :value="__('Photo de profil')" />
+            <input id="photo" type="file" name="photo" accept="image/*">
+            <x-input-error :messages="$errors->get('photo')" class="mt-2" />
         </div>
 
         <div>

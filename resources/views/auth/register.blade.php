@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
         @csrf
 
         <!-- Name -->
@@ -30,6 +30,12 @@
             <x-input-error :messages="$errors->get('adresse')" class="mt-2" />
         </div>
 
+        <!-- Image Upload -->
+        <div class="mt-4">
+            <x-input-label for="photo" :value="__('Photo de profil')" />
+            <input id="photo" type="file" name="photo" accept="image/*">
+            <x-input-error :messages="$errors->get('photo')" class="mt-2" />
+        </div>
 
         <!-- Password-->
         <div class="mt-4">
