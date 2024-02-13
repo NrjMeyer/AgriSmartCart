@@ -1,8 +1,16 @@
 <section>
     <header>
+        @if (session('status') === 'profile-updated')
+            <p style="margin-bottom: 20px; color: aqua;">{{ __('Profil modifié !') }}</p>
+        @endif
+
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('Profile Information') }}
         </h2>
+
+        <div class="profile_picture">
+            <img src="{{ asset('storage/' . $user->photo) }}" alt="{{ $user->prenoms }} {{ $user->nom }}" width="32">
+        </div>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             {{ __("Update your account's profile information and email address.") }}
@@ -13,26 +21,32 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            <x-input-label for="nom" :value="__('Nom')" />
+            <x-text-input id="nom" name="nom" type="text" class="mt-1 block w-full" :value="old('nom', $user->nom)" required autofocus autocomplete="nom" />
+            <x-input-error class="mt-2" :messages="$errors->get('nom')" />
         </div>
 
         <div>
-            <x-input-label for="firstname" :value="__('Firstname')" />
-            <x-text-input id="firstname" name="firstname" type="text" class="mt-1 block w-full" :value="old('firstname', $user->firstname)" required autofocus autocomplete="firstname" />
-            <x-input-error class="mt-2" :messages="$errors->get('firstname')" />
+            <x-input-label for="prenoms" :value="__('Prénoms')" />
+            <x-text-input id="prenoms" name="prenoms" type="text" class="mt-1 block w-full" :value="old('prenoms', $user->prenoms)" required autofocus autocomplete="prenoms" />
+            <x-input-error class="mt-2" :messages="$errors->get('prenoms')" />
         </div>
 
         <div>
-            <x-input-label for="address" :value="__('Address')" />
-            <x-text-input id="address" name="address" type="text" class="mt-1 block w-full" :value="old('address', $user->address)" required autofocus autocomplete="address" />
-            <x-input-error class="mt-2" :messages="$errors->get('address')" />
+            <x-input-label for="adresse" :value="__('adresse')" />
+            <x-text-input id="adresse" name="adresse" type="text" class="mt-1 block w-full" :value="old('adresse', $user->adresse)" required autofocus autocomplete="adresse" />
+            <x-input-error class="mt-2" :messages="$errors->get('adresse')" />
+        </div>
+
+        <div>
+            <x-input-label for="photo" :value="__('Photo de profil')" />
+            <input id="photo" type="file" name="photo" accept="image/*">
+            <x-input-error :messages="$errors->get('photo')" class="mt-2" />
         </div>
 
         <div>
