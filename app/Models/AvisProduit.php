@@ -20,7 +20,7 @@ class AvisProduit extends Model
     // Définissez les relations Eloquent si nécessaire
     public function utilisateur()
     {
-        return $this->belongsTo(Utilisateur::class, 'id_utilisateur');
+        return $this->belongsTo(User::class, 'id_utilisateur');
     }
 
     public function produit()

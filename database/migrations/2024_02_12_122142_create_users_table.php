@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('adresse', 120);
             $table->string('role', 50);
             $table->string('photo', 255)->nullable();
+            $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
             });
     }
