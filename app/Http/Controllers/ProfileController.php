@@ -34,8 +34,6 @@ class ProfileController extends Controller
             }
             $photoPath = $request->file('photo')->store('profile_photos', 'public');
             $validatedData['photo'] = $photoPath;
-            dd($photoPath);
-            exit();
         }
         $user->update($validatedData);
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
