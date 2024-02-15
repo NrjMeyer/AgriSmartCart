@@ -139,9 +139,7 @@
      
       </div>
    
-  
     @include('nav.footer')
-    </div>
   </main>
  
   <!--   Core JS Files   -->
