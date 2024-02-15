@@ -22398,7 +22398,7 @@ hr.horizontal.gray-light {
 .navbar-toggler[aria-expanded="true"] .navbar-toggler-bar.bar3 {
   transform: rotate(-45deg);
   transform-origin: 10% 90%;
-  margin-top: 3px;
+  margin-top: 9px;
 }
 
 @media (min-width: 992px) {

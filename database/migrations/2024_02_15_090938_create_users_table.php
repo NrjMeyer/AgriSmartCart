@@ -19,10 +19,11 @@ return new class extends Migration
             $table->string('password', 255);
             $table->string('adresse', 120);
             $table->string('role', 50);
+            $table->string('etat');
             $table->string('photo', 255)->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
-            });
+        });
     }
 
     /**

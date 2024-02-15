@@ -47,7 +47,7 @@
           <div class="card mb-4">
             <div class="card-header pb-0">
               <h6>Tableaux des utilisateurs</h6>
-              <a href="" class="btn btn-success " h><i class="fa fa-plus" aria-hidden="true"></i></a>
+              <a href="{{route('ajouterUsers')}}" class="btn btn-success "><i class="fa fa-plus" aria-hidden="true"></i></a>
               <form action="" method="GET">
               <!-- Ajoutez les champs de recherche dont vous avez besoin -->
               <input type="text" name="nom" placeholder="Nom d'utilisateurs">
@@ -70,8 +70,8 @@
                     </tr>
                   </thead>
                   <tbody>
+                  @foreach ($users as $user)
                     <tr>
-                    @foreach ($users as $user)
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
@@ -126,9 +126,9 @@
         @method('put')
     </form>
                       </td>
-                      @endforeach
                     </tr>
-                   
+                    @endforeach
+   
                     </tbody>
                 </table>
               </div>

@@ -39,9 +39,9 @@ class ProduitController extends Controller
         return view('produit', compact('produits'));
     }
     
-    public function addProduit()
+    public function ajoutProduit()
     {
-      return view('addProduit');
+      return view('ajouterproduit');
     }
     /**
      * Store a newly created resource in storage.
@@ -55,6 +55,8 @@ class ProduitController extends Controller
             'description' => 'required|string',
             'stock' => 'required|integer|min:0',
             'prix' => 'required|numeric|min:0.01',
+            'moq' => 'required|numeric|min:0.01',
+            'type_unite' => 'required|string',
         ]);
 
         // Créer un nouveau produit dans la base de données
@@ -63,6 +65,10 @@ class ProduitController extends Controller
             'description' => $request->description,
             'stock' => $request->stock,
             'prix' => $request->prix,
+            'moq' => $request->moq,
+            'type_unite' => $request->type_unite,
+            'id_categorie'=>1,
+            'id_users'=>3,
         ]);
 
         // Rediriger vers une page de confirmation ou ailleurs
@@ -80,7 +86,9 @@ class ProduitController extends Controller
             'nom_produit' => 'required|string|max:255',
             'description' => 'required|string',
             'stock' => 'required|integer|min:0',
-            'prix' => 'required|numeric|min:0.01',
+            'moq' => 'required|numeric|min:0.01',
+            'type_unite' => 'required|string',
+             'prix' => 'required|numeric|min:0.01',
         ]);
 
         $produit = Produit::findOrFail($id);
@@ -91,6 +99,8 @@ class ProduitController extends Controller
             'description' => $request->description,
             'stock' => $request->stock,
             'prix' => $request->prix,
+            'moq' => $request->moq,
+            'type_unite' => $request->type_unite,
         ]);
 
         return redirect()->route('produit')->with('success', 'Produit mis à jour avec succès!');

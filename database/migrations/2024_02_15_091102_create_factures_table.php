@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('factures', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_facture');
             $table->integer('id_commande');
             $table->integer('id_type');
             $table->decimal('montant_total',10,2);

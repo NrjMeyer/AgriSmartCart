@@ -18,8 +18,7 @@ class Produit extends Model
         'type_unite',
         'id_categorie',
         'id_users',
-        'created_at',
-        'etat', 
+        'created_at', 
     ];
 
 }

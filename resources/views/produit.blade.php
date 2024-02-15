@@ -47,7 +47,7 @@
           <div class="card mb-4">
             <div class="card-header pb-0">
               <h6>Tableaux des produits</h6>
-              <a href="" class="btn btn-success " h><i class="fa fa-plus" aria-hidden="true"></i></a>
+              <a href="{{route('ajoutProduit')}}" class="btn btn-success " h><i class="fa fa-plus" aria-hidden="true"></i></a>
               <form action="" method="GET">
               <!-- Ajoutez les champs de recherche dont vous avez besoin -->
               <input type="text" name="nom_produit" placeholder="Nom produit">
@@ -72,6 +72,7 @@
                     </tr>
                   </thead>
                   <tbody>
+                  @foreach ($produits as $post)
                     <tr>
                
                       <td>
@@ -80,23 +81,23 @@
                             <img src="{{asset('img/team-2.jpg')}}" class="avatar avatar-sm me-3" alt="user1">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm"></h6>
+                            <h6 class="mb-0 text-sm">{{ $post->nom_produit }}</h6>
                           </div>
                         </div>
                       </td>
                       <td>
-                        <p class="text-xs font-weight-bold mb-0"></p>
+                        <p class="text-xs font-weight-bold mb-0">{{ $post->categorie }}</p>
                         
                       </td>
                       <td class="align-middle text-left">
-                        <span class="badge badge-sm bg-gradient-info"></span>
+                        <span class="badge badge-sm bg-gradient-info">{{ $post->stock }}</span>
                       </td>
 
                       <td class="align-middle text-left">
-                        <span class="badge badge-sm bg-gradient-success"></span>
+                        <span class="badge badge-sm bg-gradient-success">{{ $post->prix }} EURO</span>
                       </td>
                       <td class="align-middle text-left">
-                        <span class="badge badge-sm bg-gradient-success"></span>
+                        <span class="badge badge-sm bg-gradient-success">{{ $post->created_at->format('d-m-y H:i') }}</span>
                       </td>
                       <td class="align-middle text-left">
                         <span class="badge badge-sm bg-gradient-success"></span>
@@ -135,7 +136,7 @@
     </form>
                       </td>
                     </tr>
-                   
+                    @endforeach
                     </tbody>
                 </table>
               </div>

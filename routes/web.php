@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\ProduitController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,13 +24,21 @@ Route::get('/', function () {
 
 Route::get('/users', [UserController::class, 'index'])->name('users');
 
-Route::get('/produit', function () {
-    return view('produit');
-})->name('produit');
+Route::get('/ajout-users', [UserController::class, 'ajouterUsers'])->name('ajouterUsers');
+Route::post('/ajouter-utilisateur', [UserController::class, 'ajouterUtilisateur']);
 
-Route::get('/categorie', function () {
-    return view('categorie');
-})->name('categorie');
+Route::get('/produit', [ProduitController::class, 'index'])->name('produit');
+
+Route::get('/ajout-produit', [ProduitController::class, 'ajoutProduit'])->name('ajoutProduit');
+Route::post('/ajouter-produit', [ProduitController::class, 'ajouterProduit']);
+
+
+Route::get('/categorie', [CategorieController::class, 'index'])->name('categorie');
+
+Route::get('/ajout-categorie', [CategorieController::class, 'ajouterCategorie'])->name('ajouterCategorie');
+Route::post('/ajouter-categorie', [CategorieController::class, 'ajouterCat']);
+
+
 
 Route::get('/commande', function () {
     return view('commande');

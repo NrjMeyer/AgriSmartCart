@@ -47,7 +47,7 @@
           <div class="card mb-4">
             <div class="card-header pb-0">
               <h6>Tableaux des categories</h6>
-              <a href="" class="btn btn-success " h><i class="fa fa-plus" aria-hidden="true"></i></a>
+              <a href="{{route('ajouterCategorie')}}" class="btn btn-success " h><i class="fa fa-plus" aria-hidden="true"></i></a>
               <form action="" method="GET">
               <!-- Ajoutez les champs de recherche dont vous avez besoin -->
               <input type="text" name="nom" placeholder="Nom">
@@ -67,15 +67,13 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td>
-                        <p class="text-xs font-weight-bold mb-0"></p>
-                        
-                      </td>
+                  @foreach ($categorie as $cat)
+                    <tr>
                       <td class="align-middle text-left">
-                        <span class="badge badge-sm bg-gradient-info"></span>
+                        <span class="badge badge-sm bg-gradient-info">{{ $cat->nom }}</span>
                       </td>
 <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold"></span>
+                        <span class="text-secondary text-xs font-weight-bold">{{ $cat->created_at }}</span>
                       </td>
                       <td class="align-middle">
                     <a class="btn btn-link text-dark px-3 mb-0" href=""><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
@@ -108,7 +106,7 @@
     </form>
                       </td>
                     </tr>
-                   
+                    @endforeach
                     </tbody>
                 </table>
               </div>
