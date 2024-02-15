@@ -36,12 +36,12 @@ class ProduitController extends Controller
         $produits = $query->get();
     
         // Passez les produits filtrés à la vue
-        return view('admin.index', compact('produits'));
+        return view('produit', compact('produits'));
     }
     
     public function addProduit()
     {
-      return view('admin.addProduit');
+      return view('addProduit');
     }
     /**
      * Store a newly created resource in storage.
@@ -66,12 +66,12 @@ class ProduitController extends Controller
         ]);
 
         // Rediriger vers une page de confirmation ou ailleurs
-        return redirect()->route('produits.index')->with('success', 'Produit ajouté avec succès!');
+        return redirect()->route('produit')->with('success', 'Produit ajouté avec succès!');
     }
     public function modifierProduit($id)
     {
         $produit = Produit::findOrFail($id);
-        return view('admin.modifier-produit', compact('produit'));
+        return view('modifier-produit', compact('produit'));
     }
 
     public function mettreAjourProduit(Request $request, $id)
@@ -93,7 +93,7 @@ class ProduitController extends Controller
             'prix' => $request->prix,
         ]);
 
-        return redirect()->route('produits.index')->with('success', 'Produit mis à jour avec succès!');
+        return redirect()->route('produit')->with('success', 'Produit mis à jour avec succès!');
     }
 
     public function supprimerProduit($id)
@@ -107,7 +107,7 @@ class ProduitController extends Controller
         ]);
     
         // Rediriger vers la page d'accueil ou ailleurs
-        return redirect()->route('produits.index')->with('success', 'Produit supprimé avec succès!');
+        return redirect()->route('produit')->with('success', 'Produit supprimé avec succès!');
     }
     
 
@@ -128,7 +128,7 @@ class ProduitController extends Controller
     }
     
         // Passez les données à la vue correspondante
-        return view('produit.show_in_commande', compact('produit', 'detailsProduitCommande', 'commande'));
+        return view('show_in_commande', compact('produit', 'detailsProduitCommande', 'commande'));
     }
     public function store(Request $request)
     {

@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,26 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/users', [UserController::class, 'index'])->name('users');
+
+Route::get('/produit', function () {
+    return view('produit');
+})->name('produit');
+
+Route::get('/categorie', function () {
+    return view('categorie');
+})->name('categorie');
+
+Route::get('/commande', function () {
+    return view('commande');
+})->name('commande');
+
+
+Route::get('/historique', function () {
+    return view('historique');
+})->name('historique');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

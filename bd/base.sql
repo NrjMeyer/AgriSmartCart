@@ -231,3 +231,149 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+-- récupérer les détails d'une commande spécifique
+SELECT
+    co.id AS commande_id,
+    co.id_users AS commande_user_id,
+    co.date_commande AS commande_date,
+    co.status AS commande_status,
+    dc.id AS details_commande_id,
+    dc.id_produit AS details_commande_produit_id,
+    dc.quantite AS details_commande_quantite,
+    dc.prix_unitaire AS details_commande_prix_unitaire,
+    fa.id AS facture_id,
+    fa.id_type AS facture_type_id,
+    fa.montant_total AS facture_montant_total,
+    fa.statut_paiement AS facture_statut_paiement,
+    fa.date_facturation AS facture_date_facturation,
+    li.id AS livraison_id,
+    li.adresse AS livraison_adresse,
+    li.ville AS livraison_ville,
+    li.code_postal AS livraison_code_postal,
+    li.pays AS livraison_pays,
+    p.id AS produit_id,
+    p.nom_produit AS produit_nom,
+    p.description AS produit_description,
+    p.prix AS produit_prix,
+    p.type_unite AS produit_type_unite,
+    c.nom AS categorie_nom,
+    tp.nom AS type_paiement_nom,
+    u.id_users AS user_id,
+    u.nom AS user_nom,
+    u.prenoms AS user_prenoms,
+    u.email AS user_email,
+    u.password AS user_password,
+    u.adresse AS user_adresse,
+    u.role AS user_role,
+    u.photo AS user_photo
+FROM
+    commandes AS co
+JOIN detailscommandes AS dc ON co.id = dc.id_commande
+JOIN factures AS fa ON co.id = fa.id_commande
+JOIN livraisons AS li ON co.id_users = li.id_users
+JOIN produit AS p ON dc.id_produit = p.id
+JOIN categories AS c ON p.id_categorie = c.id
+JOIN typepaiements AS tp ON fa.id_type = tp.id
+JOIN users AS u ON co.id_users = u.id_users
+WHERE
+    co.id = fa.id_commande;
+
+
+-- Si vous souhaitez obtenir le nombre de stocks pour chaque produit, vous pouvez ajouter une colonne à votre requête pour récupérer cette information
+SELECT
+    p.id AS produit_id,
+    p.nom_produit AS produit_nom,
+    p.description AS produit_description,
+    p.prix AS produit_prix,
+    p.stock AS produit_stock,
+    p.moq AS produit_moq,
+    p.type_unite AS produit_type_unite,
+    c.nom AS categorie_nom,
+    tp.nom AS type_paiement_nom,
+    tp.logo AS type_paiement_logo,
+    u.id_users AS user_id,
+    u.nom AS user_nom,
+    u.prenoms AS user_prenoms,
+    u.email AS user_email,
+    u.password AS user_password,
+    u.adresse AS user_adresse,
+    u.role AS user_role,
+    u.photo AS user_photo
+FROM
+    commandes AS co
+JOIN detailscommandes AS dc ON co.id = dc.id_commande
+JOIN factures AS fa ON co.id = fa.id_commande
+JOIN livraisons AS li ON co.id_users = li.id_users
+JOIN produit AS p ON dc.id_produit = p.id
+JOIN categories AS c ON p.id_categorie = c.id
+JOIN typepaiements AS tp ON fa.id_type = tp.id
+JOIN users AS u ON co.id_users = u.id_users
+WHERE
+    co.id = dc.id_commande;
+
+-- transaction spécifique d'un client lors de l'achat d'un produit
+SELECT
+    av.id AS avis_id,
+    av.commentaire AS avis_commentaire,
+    av.note AS avis_note,
+    av.id_users AS avis_user_id,
+    av.id_produit AS avis_produit_id,
+    c.nom AS categorie_nom,
+    co.id AS commande_id,
+    co.id_users AS commande_user_id,
+    co.date_commande AS commande_date,
+    co.status AS commande_status,
+    dc.id AS details_commande_id,
+    dc.id_commande AS details_commande_commande_id,
+    dc.id_produit AS details_commande_produit_id,
+    dc.quantite AS details_commande_quantite,
+    dc.prix_unitaire AS details_commande_prix_unitaire,
+    fa.id AS facture_id,
+    fa.id_commande AS facture_commande_id,
+    fa.id_type AS facture_type_id,
+    fa.montant_total AS facture_montant_total,
+    fa.statut_paiement AS facture_statut_paiement,
+    fa.date_facturation AS facture_date_facturation,
+    li.id AS livraison_id,
+    li.id_users AS livraison_user_id,
+    li.adresse AS livraison_adresse,
+    li.ville AS livraison_ville,
+    li.code_postal AS livraison_code_postal,
+    li.pays AS livraison_pays,
+    p.id AS produit_id,
+    p.nom_produit AS produit_nom,
+    p.description AS produit_description,
+    p.prix AS produit_prix,
+    p.stock AS produit_stock,
+    p.moq AS produit_moq,
+    p.type_unite AS produit_type_unite,
+    p.id_categorie AS produit_categorie_id,
+    p.id_users AS produit_user_id,
+    p.etat AS produit_etat,
+    tp.nom AS type_paiement_nom,
+    tp.logo AS type_paiement_logo,
+    u.id_users AS user_id,
+    u.nom AS user_nom,
+    u.prenoms AS user_prenoms,
+    u.email AS user_email,
+    u.password AS user_password,
+    u.adresse AS user_adresse,
+    u.role AS user_role,
+    u.photo AS user_photo
+FROM
+    avis_produits AS av
+JOIN categories AS c ON av.id_produit = c.id
+JOIN commandes AS co ON av.id_users = co.id_users
+JOIN detailscommandes AS dc ON co.id = dc.id_commande
+JOIN factures AS fa ON co.id = fa.id_commande
+JOIN livraisons AS li ON av.id_users = li.id_users
+JOIN produit AS p ON av.id_produit = p.id
+JOIN typepaiements AS tp ON fa.id_type = tp.id
+JOIN users AS u ON av.id_users = u.id_users
+WHERE
+    av.id_users = u.id_users
+    AND av.id_produit = p.id;
+
